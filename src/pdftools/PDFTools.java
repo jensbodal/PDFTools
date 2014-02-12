@@ -18,10 +18,12 @@ import org.apache.pdfbox.pdfviewer.PageWrapper;
 import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.common.PDStream;
 import java.awt.BorderLayout;
+import java.awt.Font;
 import org.icepdf.ri.common.ComponentKeyBinding;
 import org.icepdf.ri.common.SwingController;
 import org.icepdf.ri.common.SwingViewBuilder;
 import org.icepdf.ri.common.ViewModel;
+import org.icepdf.ri.util.PropertiesManager;
 
 
 
@@ -44,19 +46,44 @@ public class PDFTools
         frame.setLayout(new BorderLayout());
 
         
-//        File PDF_Path = new File("C:\\Users\\jensb\\Dropbox\\Java Libraries\\zProjectStuff\\PDF_Stuff\\12-13 Port Risk Binder.PDF");
-        File PDF_Path = new File("I:\\Dropbox\\Java Libraries\\zProjectStuff\\PDF_Stuff\\test.PDF");
+        File PDF_Path = new File("C:\\Users\\jensb\\Dropbox\\Java Libraries\\zProjectStuff\\PDF_Stuff\\12-13 Port Risk Binder.PDF");
+        //File PDF_Path = new File("I:\\Dropbox\\Java Libraries\\zProjectStuff\\PDF_Stuff\\test.PDF");
         //File PDF_Path = new File("C:\\Users\\jensb\\Dropbox\\Java Libraries\\zProjectStuff\\PDF_Stuff\\test.PDF");
         
         //Begin ICEPDF
         // build a controller
         SwingController controller = new SwingController();
-
-        // Build a SwingViewFactory configured with the controller
-        SwingViewBuilder factory = new SwingViewBuilder(controller);
         
+               
+        
+        // Build a SwingViewFactory configured with the controller
+        // Optional settings to figure out:
+        /*
+         * SwingViewBuilder(SwingController c, java.awt.Font bf, boolean bt, int ts, float[] zl, int documentViewType, int documentPageFitMode) 
+         * SwingViewBuilder(SwingController c, int documentViewType, int documentPageFitMode) 
+         * ////*** DEFAULTS *** \\\\
+         * this(c, null, null, false, SwingViewBuilder.TOOL_BAR_STYLE_FIXED, null,
+                DocumentViewControllerImpl.ONE_PAGE_VIEW,
+                DocumentViewController.PAGE_FIT_WINDOW_HEIGHT);
+         * ///*** FINAL CONSTRUCTOR *** \\\
+         *     public SwingViewBuilder(SwingController c, PropertiesManager properties,
+                            Font bf, boolean bt, int ts,
+                            float[] zl, final int documentViewType,
+                            final int documentPageFitMode)
+         */
+        Float HALF = new Float(0.5);
+        Font myFont = frame.getFont();
+        boolean bt = false; //showButtonText
+        int ts = 0; // toolbarStyle
+        float[] zl = null; // zoomLevels
+        int documentViewType = 1;
+        int documentPageFitMode = 1;
+        
+        //SwingViewBuilder factory = new SwingViewBuilder(controller, myFont, bt, ts, zl, documentViewType, documentPageFitMode);
+        PDF_Panel factory = new PDF_Panel(controller);
         // Use the factory to build a JPanel that is pre-configured
         //with a complete, active Viewer UI.
+        
         JPanel viewerComponentPanel = factory.buildViewerPanel();
         
         // add copy keyboard command
@@ -71,6 +98,7 @@ public class PDFTools
         JFrame window = new JFrame("Using the Viewer Component");
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.getContentPane().add(viewerComponentPanel);
+        //window.getContentPane().add(viewerFrame);
         //window.add(viewerComponentPanel);
         window.pack();
         window.setVisible(true);
