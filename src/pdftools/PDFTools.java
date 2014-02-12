@@ -80,7 +80,7 @@ public class PDFTools
         int documentPageFitMode = 1;
         
         //SwingViewBuilder factory = new SwingViewBuilder(controller, myFont, bt, ts, zl, documentViewType, documentPageFitMode);
-        PDF_Panel factory = new PDF_Panel(controller);
+        Panel_Builder factory = new Panel_Builder(controller);
         // Use the factory to build a JPanel that is pre-configured
         //with a complete, active Viewer UI.
         

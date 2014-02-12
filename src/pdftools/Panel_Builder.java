@@ -7,9 +7,9 @@ import org.icepdf.ri.common.SwingViewBuilder;
  *
  * @author jensb
  */
-public class PDF_Panel extends SwingViewBuilder {
+public class Panel_Builder extends SwingViewBuilder {
     
-    public PDF_Panel(SwingController c) {
+    public Panel_Builder(SwingController c) {
         super(c);
     }
     
