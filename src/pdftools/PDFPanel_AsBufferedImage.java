@@ -17,7 +17,7 @@ import org.apache.pdfbox.pdmodel.PDPage;
  *
  * @author jensb
  */
-public class PDFPanel extends JPanel {
+public class PDFPanel_AsBufferedImage extends JPanel {
     
     private int DESIRED_WIDTH = 750;
     private int DESIRED_HEIGHT = 1000;
@@ -28,7 +28,7 @@ public class PDFPanel extends JPanel {
     private BufferedImage image;
     
     
-    public PDFPanel(PDPage pdf) {
+    public PDFPanel_AsBufferedImage(PDPage pdf) {
         try {
             image = pdf.convertToImage();
         }

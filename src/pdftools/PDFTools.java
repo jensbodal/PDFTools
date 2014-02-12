@@ -5,18 +5,11 @@
 
 package pdftools;
 
-import java.awt.Graphics;
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import org.apache.pdfbox.PDFBox;
 import org.apache.pdfbox.exceptions.COSVisitorException;
-import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.util.Splitter;
 import org.apache.pdfbox.PDFReader;
 import org.apache.pdfbox.cos.COSDocument;
@@ -28,10 +21,11 @@ import java.awt.BorderLayout;
 import org.icepdf.ri.common.ComponentKeyBinding;
 import org.icepdf.ri.common.SwingController;
 import org.icepdf.ri.common.SwingViewBuilder;
+import org.icepdf.ri.common.ViewModel;
 
 
 
-
+//http://www.icesoft.org/wiki/display/PDF/API+Documentation
 /**
  *
  * @author jensb
@@ -60,11 +54,11 @@ public class PDFTools
 
         // Build a SwingViewFactory configured with the controller
         SwingViewBuilder factory = new SwingViewBuilder(controller);
-
+        
         // Use the factory to build a JPanel that is pre-configured
         //with a complete, active Viewer UI.
         JPanel viewerComponentPanel = factory.buildViewerPanel();
-
+        
         // add copy keyboard command
         ComponentKeyBinding.install(controller, viewerComponentPanel);
 
@@ -77,6 +71,7 @@ public class PDFTools
         JFrame window = new JFrame("Using the Viewer Component");
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.getContentPane().add(viewerComponentPanel);
+        //window.add(viewerComponentPanel);
         window.pack();
         window.setVisible(true);
         // Open a PDF document to view
