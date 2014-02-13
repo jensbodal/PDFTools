@@ -62,7 +62,7 @@ public class Panel_Builder extends SwingViewBuilder {
         
     }
     
-    public Panel_Builder(SwingController c, 
+    public Panel_Builder(Panel_Controller c, 
             boolean disableToolBar, boolean disableStatusPanel) {
         super(c);
         this.disableToolBar = disableToolBar;
@@ -88,6 +88,7 @@ public class Panel_Builder extends SwingViewBuilder {
             viewer.setJMenuBar(menuBar);
         Container contentPane = viewer.getContentPane();
         buildContents(contentPane, false);
+        //viewerController is a SwingController
         if (viewerController != null)
             viewerController.setViewerFrame(viewer);
         return viewer;

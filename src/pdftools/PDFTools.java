@@ -49,7 +49,7 @@ public class PDFTools
         
         //Begin ICEPDF
         // build a controller
-        SwingController controller = new SwingController();
+        Panel_Controller controller = new Panel_Controller();
        
         Panel_Builder factory = new Panel_Builder(controller, false, false);
         // Use the factory to build a JPanel that is pre-configured
@@ -60,10 +60,13 @@ public class PDFTools
         JPanel viewerComponentPanel = factory.buildViewerPanel();
         
         JFrame viewerComponentFrame = factory.buildViewerFrame();
-        
-        
+        viewerComponentFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        viewerComponentFrame.setBounds(factory.Get_X_BOUND(), factory.Get_Y_BOUND(), 
+                factory.Get_WIDTH(), factory.Get_HEIGHT());
+        viewerComponentFrame.pack();
+        viewerComponentFrame.setVisible(true);
         // add copy keyboard command
-        // have not figured out what this does
+        // this adds control/copy ability
         ComponentKeyBinding.install(controller, viewerComponentPanel);
 
         // add interactive mouse link annotation support via callback
@@ -81,7 +84,7 @@ public class PDFTools
         frame.setBounds(factory.Get_X_BOUND(), factory.Get_Y_BOUND(), 
                 factory.Get_WIDTH(), factory.Get_HEIGHT());
         frame.pack();
-        frame.setVisible(true);
+        //frame.setVisible(true);
         // Open a PDF document to view
         controller.openDocument(PDF_Path.getAbsolutePath());
         
