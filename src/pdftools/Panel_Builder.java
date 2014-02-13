@@ -36,8 +36,8 @@ public class Panel_Builder extends SwingViewBuilder {
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         int screen_width = (int)screenSize.getWidth();
         int screen_height = (int)screenSize.getHeight();
-        PANEL_X = (screen_width-PANEL_WIDTH) - 20;
-        PANEL_Y = (screen_height - PANEL_HEIGHT) - 100;
+        PANEL_X = (screen_width-PANEL_WIDTH)- 400;
+        PANEL_Y = (screen_height - PANEL_HEIGHT)- 200;
     }
     
     public int Get_X_BOUND() {

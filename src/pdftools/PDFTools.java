@@ -19,6 +19,7 @@ import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.common.PDStream;
 import java.awt.BorderLayout;
 import java.awt.Font;
+import org.apache.pdfbox.pdmodel.PDDocument;
 import org.icepdf.ri.common.ComponentKeyBinding;
 import org.icepdf.ri.common.SwingController;
 import org.icepdf.ri.common.SwingViewBuilder;
@@ -43,10 +44,13 @@ public class PDFTools
         
         Splitter splitPDF = new Splitter();
         
-        File PDF_Path = new File("C:\\Users\\jensb\\Dropbox\\Java Libraries\\zProjectStuff\\PDF_Stuff\\12-13 Port Risk Binder.PDF");
-        //File PDF_Path = new File("I:\\Dropbox\\Java Libraries\\zProjectStuff\\PDF_Stuff\\test.PDF");
-        //File PDF_Path = new File("C:\\Users\\jensb\\Dropbox\\Java Libraries\\zProjectStuff\\PDF_Stuff\\test.PDF");
-        
+        String PDF_Path = "C:\\Users\\jensb\\Dropbox\\Java Libraries\\zProjectStuff\\PDF_Stuff\\12-13 Port Risk Binder.PDF";
+        File PDF_File = new File(PDF_Path);
+        //File PDF_File = new File("I:\\Dropbox\\Java Libraries\\zProjectStuff\\PDF_Stuff\\test.PDF");
+        //File PDF_File = new File("C:\\Users\\jensb\\Dropbox\\Java Libraries\\zProjectStuff\\PDF_Stuff\\test.PDF");
+        PDDocument inputPDF = PDDocument.load(PDF_File);
+        inputPDF.close();
+              
         //Begin ICEPDF
         // build a controller
         Panel_Controller controller = new Panel_Controller();
@@ -86,7 +90,9 @@ public class PDFTools
         frame.pack();
         //frame.setVisible(true);
         // Open a PDF document to view
-        controller.openDocument(PDF_Path.getAbsolutePath());
+        //controller.openDocument(inputPDF);
+        inputPDF.close();
+        controller.openDocument(PDF_Path);
         
         
                 
@@ -117,7 +123,7 @@ public class PDFTools
 //            PDPage thispage = new PDPage();
 //            //thisPage = (PDPage)page;
 //            StringBuilder newString = new StringBuilder();
-//            newString.append(PDF_Path);
+//            newString.append(PDF_File);
 //            int length = newString.length();
 //            newString.replace(length - 4, length, "");
 //            newString.append(i);
