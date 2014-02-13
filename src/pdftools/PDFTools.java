@@ -42,9 +42,6 @@ public class PDFTools
     {
         
         Splitter splitPDF = new Splitter();
-        JFrame frame = new JFrame();
-        frame.setLayout(new BorderLayout());
-
         
         File PDF_Path = new File("C:\\Users\\jensb\\Dropbox\\Java Libraries\\zProjectStuff\\PDF_Stuff\\12-13 Port Risk Binder.PDF");
         //File PDF_Path = new File("I:\\Dropbox\\Java Libraries\\zProjectStuff\\PDF_Stuff\\test.PDF");
@@ -53,55 +50,38 @@ public class PDFTools
         //Begin ICEPDF
         // build a controller
         SwingController controller = new SwingController();
-        
-               
-        
-        // Build a SwingViewFactory configured with the controller
-        // Optional settings to figure out:
-        /*
-         * SwingViewBuilder(SwingController c, java.awt.Font bf, boolean bt, int ts, float[] zl, int documentViewType, int documentPageFitMode) 
-         * SwingViewBuilder(SwingController c, int documentViewType, int documentPageFitMode) 
-         * ////*** DEFAULTS *** \\\\
-         * this(c, null, null, false, SwingViewBuilder.TOOL_BAR_STYLE_FIXED, null,
-                DocumentViewControllerImpl.ONE_PAGE_VIEW,
-                DocumentViewController.PAGE_FIT_WINDOW_HEIGHT);
-         * ///*** FINAL CONSTRUCTOR *** \\\
-         *     public SwingViewBuilder(SwingController c, PropertiesManager properties,
-                            Font bf, boolean bt, int ts,
-                            float[] zl, final int documentViewType,
-                            final int documentPageFitMode)
-         */
-        Float HALF = new Float(0.5);
-        Font myFont = frame.getFont();
-        boolean bt = false; //showButtonText
-        int ts = 0; // toolbarStyle
-        float[] zl = null; // zoomLevels
-        int documentViewType = 1;
-        int documentPageFitMode = 1;
-        
-        //SwingViewBuilder factory = new SwingViewBuilder(controller, myFont, bt, ts, zl, documentViewType, documentPageFitMode);
-        Panel_Builder factory = new Panel_Builder(controller);
+       
+        Panel_Builder factory = new Panel_Builder(controller, false, false);
         // Use the factory to build a JPanel that is pre-configured
         //with a complete, active Viewer UI.
         
+        // This is the JPanel which displays the PDF and menu bars
+        // Other option would be to use the viewerComponentFrame
         JPanel viewerComponentPanel = factory.buildViewerPanel();
         
+        JFrame viewerComponentFrame = factory.buildViewerFrame();
+        
+        
         // add copy keyboard command
+        // have not figured out what this does
         ComponentKeyBinding.install(controller, viewerComponentPanel);
 
         // add interactive mouse link annotation support via callback
+        // have not figured out what this does
         controller.getDocumentViewController().setAnnotationCallback(
         new org.icepdf.ri.common.MyAnnotationCallback(
              controller.getDocumentViewController()));
 
         // Create a JFrame to display the panel in
-        JFrame window = new JFrame("Using the Viewer Component");
-        window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        window.getContentPane().add(viewerComponentPanel);
-        //window.getContentPane().add(viewerFrame);
-        //window.add(viewerComponentPanel);
-        window.pack();
-        window.setVisible(true);
+        JFrame frame = new JFrame();
+        //frame.setTitle(factory.Get_Title());
+        frame.setJMenuBar(factory.buildCompleteMenuBar());
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.getContentPane().add(viewerComponentPanel);
+        frame.setBounds(factory.Get_X_BOUND(), factory.Get_Y_BOUND(), 
+                factory.Get_WIDTH(), factory.Get_HEIGHT());
+        frame.pack();
+        frame.setVisible(true);
         // Open a PDF document to view
         controller.openDocument(PDF_Path.getAbsolutePath());
         
