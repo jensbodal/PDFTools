@@ -43,8 +43,9 @@ public class PDFTools
     public static void main(String[] args) throws IOException {
         
         Splitter splitPDF = new Splitter();
-        
-        String PDF_Path = "C:\\Users\\jensb\\Dropbox\\Java Libraries\\zProjectStuff\\PDF_Stuff\\12-13 Port Risk Binder.PDF";
+                String PDF_Path = "/Users/akevit/Dropbox/Java Libraries/zProjectStuff/PDF_Stuff/12-13 Port Risk Binder.PDF";
+
+        //String PDF_Path = "C:\\Users\\jensb\\Dropbox\\Java Libraries\\zProjectStuff\\PDF_Stuff\\12-13 Port Risk Binder.PDF";
         PDDocument.load(PDF_Path);
         File PDF_File = new File(PDF_Path);
         //File PDF_File = new File("I:\\Dropbox\\Java Libraries\\zProjectStuff\\PDF_Stuff\\test.PDF");
