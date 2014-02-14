@@ -19,6 +19,7 @@ import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.common.PDStream;
 import java.awt.BorderLayout;
 import java.awt.Font;
+import java.util.List;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.icepdf.ri.common.ComponentKeyBinding;
 import org.icepdf.ri.common.SwingController;
@@ -48,53 +49,55 @@ public class PDFTools
         //File PDF_File = new File("I:\\Dropbox\\Java Libraries\\zProjectStuff\\PDF_Stuff\\test.PDF");
         //File PDF_File = new File("C:\\Users\\jensb\\Dropbox\\Java Libraries\\zProjectStuff\\PDF_Stuff\\test.PDF");
         //PDDocument inputPDF = PDDocument.load(PDF_File); 
-        testCustomPDDocument testPDF = testCustomPDDocument.load(PDF_File);
+        //testCustomDocument test;
+        ICE_PDD test;
+        PDDocument inputPDF = ICE_PDD.load(PDF_File);
         
-        inputPDF.close();
-              
-        //Begin ICEPDF
-        // build a controller
-        Panel_Controller controller = new Panel_Controller();
-       
-        Panel_Builder factory = new Panel_Builder(controller, false, false);
-        // Use the factory to build a JPanel that is pre-configured
-        //with a complete, active Viewer UI.
         
-        // This is the JPanel which displays the PDF and menu bars
-        // Other option would be to use the viewerComponentFrame
-        JPanel viewerComponentPanel = factory.buildViewerPanel();
         
-        JFrame viewerComponentFrame = factory.buildViewerFrame();
-        viewerComponentFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        viewerComponentFrame.setBounds(factory.Get_X_BOUND(), factory.Get_Y_BOUND(), 
-                factory.Get_WIDTH(), factory.Get_HEIGHT());
-        viewerComponentFrame.pack();
-        viewerComponentFrame.setVisible(true);
-        // add copy keyboard command
-        // this adds control/copy ability
-        ComponentKeyBinding.install(controller, viewerComponentPanel);
-
-        // add interactive mouse link annotation support via callback
-        // have not figured out what this does
-        controller.getDocumentViewController().setAnnotationCallback(
-        new org.icepdf.ri.common.MyAnnotationCallback(
-             controller.getDocumentViewController()));
-
-        // Create a JFrame to display the panel in
-        JFrame frame = new JFrame();
-        //frame.setTitle(factory.Get_Title());
-        frame.setJMenuBar(factory.buildCompleteMenuBar());
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.getContentPane().add(viewerComponentPanel);
-        frame.setBounds(factory.Get_X_BOUND(), factory.Get_Y_BOUND(), 
-                factory.Get_WIDTH(), factory.Get_HEIGHT());
-        frame.pack();
-        //frame.setVisible(true);
-        // Open a PDF document to view
-        //controller.openDocument(inputPDF);
-        inputPDF.close();
-        controller.openDocument(PDF_Path);
-        
+//        //Begin ICEPDF
+//        // build a controller
+//        Panel_Controller controller = new Panel_Controller();
+//       
+//        Panel_Builder factory = new Panel_Builder(controller, false, false);
+//        // Use the factory to build a JPanel that is pre-configured
+//        //with a complete, active Viewer UI.
+//        
+//        // This is the JPanel which displays the PDF and menu bars
+//        // Other option would be to use the viewerComponentFrame
+//        JPanel viewerComponentPanel = factory.buildViewerPanel();
+//        
+//        JFrame viewerComponentFrame = factory.buildViewerFrame();
+//        viewerComponentFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//        viewerComponentFrame.setBounds(factory.Get_X_BOUND(), factory.Get_Y_BOUND(), 
+//                factory.Get_WIDTH(), factory.Get_HEIGHT());
+//        viewerComponentFrame.pack();
+//        viewerComponentFrame.setVisible(true);
+//        // add copy keyboard command
+//        // this adds control/copy ability
+//        ComponentKeyBinding.install(controller, viewerComponentPanel);
+//
+//        // add interactive mouse link annotation support via callback
+//        // have not figured out what this does
+//        controller.getDocumentViewController().setAnnotationCallback(
+//        new org.icepdf.ri.common.MyAnnotationCallback(
+//             controller.getDocumentViewController()));
+//
+//        // Create a JFrame to display the panel in
+//        JFrame frame = new JFrame();
+//        //frame.setTitle(factory.Get_Title());
+//        frame.setJMenuBar(factory.buildCompleteMenuBar());
+//        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//        frame.getContentPane().add(viewerComponentPanel);
+//        frame.setBounds(factory.Get_X_BOUND(), factory.Get_Y_BOUND(), 
+//                factory.Get_WIDTH(), factory.Get_HEIGHT());
+//        frame.pack();
+//        //frame.setVisible(true);
+//        // Open a PDF document to view
+//        //controller.openDocument(inputPDF);
+//        
+//        controller.openDocument(PDF_Path);
+//        
         
                 
         
@@ -112,14 +115,14 @@ public class PDFTools
 //        testFrame.setBounds(40, 40, pdfPanel.getWidth(), pdfPanel.getHeight());
 //        testFrame.setVisible(true);
         
-//        List<PDDocument> list = splitPDF.split(inputPDF); // This creates a list of PDDocuments
-//        System.out.println(list.size());
-//        for (PDDocument page : list) {
-//            List<PDPage> pageList = page.getDocumentCatalog().getAllPages();
-//            PDPage thisPage = (PDPage)pageList.get(0);
-//        }
+        List<PDDocument> list = splitPDF.split(inputPDF); // This creates a list of PDDocuments
+        System.out.println(list.size());
+        for (PDDocument page : list) {
+            List<PDPage> pageList = page.getDocumentCatalog().getAllPages();
+           PDPage thisPage = (PDPage)pageList.get(0);
+        }
         
-        
+        inputPDF.close();
         
 //            PDPage thispage = new PDPage();
 //            //thisPage = (PDPage)page;
