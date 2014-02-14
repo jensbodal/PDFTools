@@ -43,16 +43,25 @@ public class PDFTools
     public static void main(String[] args) throws IOException {
         
         Splitter splitPDF = new Splitter();
-                String PDF_Path = "/Users/akevit/Dropbox/Java Libraries/zProjectStuff/PDF_Stuff/12-13 Port Risk Binder.PDF";
+        String pathWork = "C:\\Users\\jensb\\Dropbox\\Java Libraries\\zProjectStuff\\PDF_Stuff\\12-13 Port Risk Binder.PDF";
+        String pathHome = "I:\\Dropbox\\Java Libraries\\zProjectStuff\\PDF_Stuff\\test.PDF";
+        String path_OSX = "/Users/akevit/Dropbox/Java Libraries/zProjectStuff/PDF_Stuff/12-13 Port Risk Binder.PDF";
+        String PDF_Path = "";
+        
+        if (new File(pathWork).exists()) {
+            PDF_Path = pathWork;
+        }
+        else if (new File(pathHome).exists()) {
+            PDF_Path = pathHome;
+        }
+        else if (new File(path_OSX).exists()) {
+            PDF_Path = path_OSX;
+        }
+        else {
+            System.exit(0);
+        }
 
-        //String PDF_Path = "C:\\Users\\jensb\\Dropbox\\Java Libraries\\zProjectStuff\\PDF_Stuff\\12-13 Port Risk Binder.PDF";
-        PDDocument.load(PDF_Path);
         File PDF_File = new File(PDF_Path);
-        //File PDF_File = new File("I:\\Dropbox\\Java Libraries\\zProjectStuff\\PDF_Stuff\\test.PDF");
-        //File PDF_File = new File("C:\\Users\\jensb\\Dropbox\\Java Libraries\\zProjectStuff\\PDF_Stuff\\test.PDF");
-        //PDDocument inputPDF = PDDocument.load(PDF_File); 
-        //testCustomDocument test;
-        ICE_PDD test;
         PDDocument inputPDF = ICE_PDD.load(PDF_File);
         
         
