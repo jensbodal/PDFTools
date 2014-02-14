@@ -49,6 +49,7 @@ public class PDFTools
         //File PDF_File = new File("C:\\Users\\jensb\\Dropbox\\Java Libraries\\zProjectStuff\\PDF_Stuff\\test.PDF");
         //PDDocument inputPDF = PDDocument.load(PDF_File); 
         testCustomPDDocument testPDF = testCustomPDDocument.load(PDF_File);
+        
         inputPDF.close();
               
         //Begin ICEPDF
