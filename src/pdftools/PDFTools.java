@@ -39,8 +39,7 @@ public class PDFTools
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) throws IOException, COSVisitorException 
-    {
+    public static void main(String[] args) throws IOException {
         
         Splitter splitPDF = new Splitter();
         
@@ -48,7 +47,8 @@ public class PDFTools
         File PDF_File = new File(PDF_Path);
         //File PDF_File = new File("I:\\Dropbox\\Java Libraries\\zProjectStuff\\PDF_Stuff\\test.PDF");
         //File PDF_File = new File("C:\\Users\\jensb\\Dropbox\\Java Libraries\\zProjectStuff\\PDF_Stuff\\test.PDF");
-        PDDocument inputPDF = PDDocument.load(PDF_File);
+        PDDocument inputPDF = inputPDF.load(PDF_File); 
+        
         inputPDF.close();
               
         //Begin ICEPDF
