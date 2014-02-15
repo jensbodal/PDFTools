@@ -19,6 +19,9 @@ import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.common.PDStream;
 import java.awt.BorderLayout;
 import java.awt.Font;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.util.List;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.icepdf.ri.common.ComponentKeyBinding;
@@ -43,7 +46,7 @@ public class PDFTools
     public static void main(String[] args) throws IOException {
         
         Splitter splitPDF = new Splitter();
-        
+
         String PDF_Path = "C:\\Users\\jensb\\Dropbox\\Java Libraries\\zProjectStuff\\PDF_Stuff\\12-13 Port Risk Binder.PDF";
         PDDocument.load(PDF_Path);
         File PDF_File = new File(PDF_Path);
@@ -51,10 +54,72 @@ public class PDFTools
         //File PDF_File = new File("C:\\Users\\jensb\\Dropbox\\Java Libraries\\zProjectStuff\\PDF_Stuff\\test.PDF");
         //PDDocument inputPDF = PDDocument.load(PDF_File); 
         //testCustomDocument test;
-        ICE_PDD test;
-        PDDocument inputPDF = ICE_PDD.load(PDF_File);
+        
+        final PDDocument inputPDF = ICE_PDD.load(PDF_File);
+        
+        List<PDDocument> list = splitPDF.split(inputPDF); // This creates a list of PDDocuments
+        System.out.println(list.size());
+        for (PDDocument page : list) {
+            List<PDPage> pageList = page.getDocumentCatalog().getAllPages();
+           PDPage thisPage = (PDPage)pageList.get(0);
+        }
+        Runnable r = new Runnable() {
+            @Override
+            public void run() {
+                System.out.println("Hello world");
+            }
+        };
+        r.run();
+        
+        List<PDPage> allPages = inputPDF.getDocumentCatalog().getAllPages();
+        PDPage testPage = (PDPage)allPages.get(0);
+        final JFrame testFrame = new JFrame();
+        testFrame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        PDFPagePanel pdfPanel = new PDFPagePanel();
+        pdfPanel.setPage(testPage);
+        testFrame.add(pdfPanel);
+        testFrame.setBounds(40, 40, pdfPanel.getWidth(), pdfPanel.getHeight());
+        testFrame.setVisible(true);
+        
+        testFrame.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                try {
+                    System.out.println("Window Closing");
+                    inputPDF.close();
+                    testFrame.setVisible(false);
+                    //testFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                }
+                catch (IOException io) {
+                    io.printStackTrace();
+                }
+            }
+            @Override
+            public void windowLostFocus(WindowEvent e) {
+                System.out.println("Lost Focus");
+            }
+            
+            @Override
+            public void windowActivated(WindowEvent e) {
+                System.out.println("Activated");
+            }
+            
+            @Override
+            public void windowDeactivated(WindowEvent e) {
+                System.out.println("Deactivated");
+            }
+            
+            @Override
+            public void windowClosed(WindowEvent e) {
+                System.out.println("Window Closed");
+            }
+            
+        });
+        
+ 
         
         
+
         
 //        //Begin ICEPDF
 //        // build a controller
@@ -116,14 +181,7 @@ public class PDFTools
 //        testFrame.setBounds(40, 40, pdfPanel.getWidth(), pdfPanel.getHeight());
 //        testFrame.setVisible(true);
         
-        List<PDDocument> list = splitPDF.split(inputPDF); // This creates a list of PDDocuments
-        System.out.println(list.size());
-        for (PDDocument page : list) {
-            List<PDPage> pageList = page.getDocumentCatalog().getAllPages();
-           PDPage thisPage = (PDPage)pageList.get(0);
-        }
-        
-        inputPDF.close();
+
         
 //            PDPage thispage = new PDPage();
 //            //thisPage = (PDPage)page;
@@ -148,5 +206,9 @@ public class PDFTools
         //frame.setVisible(true);
         
     }
+    
+    
+    
+         
 
 }
