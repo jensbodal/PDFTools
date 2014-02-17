@@ -44,30 +44,37 @@ public class PDFTools
      * @param args the command line arguments
      */
     public static void main(String[] args) throws IOException {
+        PDFTools_Model model = new PDFTools_Model();
+        PDFTools_View view = new PDFTools_View(model);
+        PDFTools_Controller controller = new PDFTools_Controller(model, view);
+        System.out.println(model.getPath());
+        view.setVisible(true);
+        while (view.isVisible()) {
+            
+        }
+        
         
         Splitter splitPDF = new Splitter();
-        String pathWork = "C:\\Users\\jensb\\Dropbox\\Java Libraries\\zProjectStuff\\PDF_Stuff\\12-13 Port Risk Binder.PDF";
-        String pathHome = "I:\\Dropbox\\Java Libraries\\zProjectStuff\\PDF_Stuff\\test.PDF";
-        String path_OSX = "/Users/akevit/Dropbox/Java Libraries/zProjectStuff/PDF_Stuff/12-13 Port Risk Binder.PDF";
-        String PDF_Path = "";
-        
-        if (new File(pathWork).exists()) {
-            PDF_Path = pathWork;
-        }
-        else if (new File(pathHome).exists()) {
-            PDF_Path = pathHome;
-        }
-        else if (new File(path_OSX).exists()) {
-            PDF_Path = path_OSX;
-        }
-        else {
-            System.exit(0);
-        }
 
-        File PDF_File = new File(PDF_Path);
-        PDDocument inputPDF = ICE_PDD.load(PDF_File);
         
         
+        
+        
+        
+        PDFPagePanel panel = new PDFPagePanel();
+        JFrame frame = new JFrame();
+        WindowAdapter adapter = new WindowAdapter() {
+            public void asdf(PDPage page) {
+                
+            }
+            
+            @Override
+            public void windowActivated(WindowEvent we) {
+                System.out.println("Activated");
+            }
+        };
+        frame.addWindowListener(adapter);
+        frame.setVisible(true);
 
         
 //        //Begin ICEPDF
