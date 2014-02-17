@@ -46,114 +46,26 @@ public class PDFTools
     public static void main(String[] args) throws IOException {
         
         Splitter splitPDF = new Splitter();
+        String pathWork = "C:\\Users\\jensb\\Dropbox\\Java Libraries\\zProjectStuff\\PDF_Stuff\\12-13 Port Risk Binder.PDF";
+        String pathHome = "I:\\Dropbox\\Java Libraries\\zProjectStuff\\PDF_Stuff\\test.PDF";
+        String path_OSX = "/Users/akevit/Dropbox/Java Libraries/zProjectStuff/PDF_Stuff/12-13 Port Risk Binder.PDF";
+        String PDF_Path = "";
+        
+        if (new File(pathWork).exists()) {
+            PDF_Path = pathWork;
+        }
+        else if (new File(pathHome).exists()) {
+            PDF_Path = pathHome;
+        }
+        else if (new File(path_OSX).exists()) {
+            PDF_Path = path_OSX;
+        }
+        else {
+            System.exit(0);
+        }
 
-        String PDF_Path = "C:\\Users\\jensb\\Dropbox\\Java Libraries\\zProjectStuff\\PDF_Stuff\\12-13 Port Risk Binder.PDF";
-        PDDocument.load(PDF_Path);
         File PDF_File = new File(PDF_Path);
-        //File PDF_File = new File("I:\\Dropbox\\Java Libraries\\zProjectStuff\\PDF_Stuff\\test.PDF");
-        //File PDF_File = new File("C:\\Users\\jensb\\Dropbox\\Java Libraries\\zProjectStuff\\PDF_Stuff\\test.PDF");
-        //PDDocument inputPDF = PDDocument.load(PDF_File); 
-        //testCustomDocument test;
-        
-        final PDDocument inputPDF = ICE_PDD.load(PDF_File);
-        
-        List<PDDocument> list = splitPDF.split(inputPDF); // This creates a list of PDDocuments
-        System.out.println(list.size());
-        for (PDDocument page : list) {
-            List<PDPage> pageList = page.getDocumentCatalog().getAllPages();
-           PDPage thisPage = (PDPage)pageList.get(0);
-        }
-        Runnable r = new Runnable() {
-            @Override
-            public void run() {
-                System.out.println("Hello world");
-            }
-        };
-        r.run();
-        
-        List<PDPage> allPages = inputPDF.getDocumentCatalog().getAllPages();
-        PDPage testPage = (PDPage)allPages.get(0);
-        final JFrame testFrame = new JFrame();
-        testFrame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-        PDFPagePanel pdfPanel = new PDFPagePanel();
-        pdfPanel.setPage(testPage);
-        testFrame.add(pdfPanel);
-        testFrame.setBounds(40, 40, pdfPanel.getWidth(), pdfPanel.getHeight());
-        testFrame.setVisible(true);
-        WindowListener test = new WindowListener() {
-
-            @Override
-            public void windowOpened(WindowEvent we) {
-                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-            }
-
-            @Override
-            public void windowClosing(WindowEvent we) {
-                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-            }
-
-            @Override
-            public void windowClosed(WindowEvent we) {
-                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-            }
-
-            @Override
-            public void windowIconified(WindowEvent we) {
-                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-            }
-
-            @Override
-            public void windowDeiconified(WindowEvent we) {
-                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-            }
-
-            @Override
-            public void windowActivated(WindowEvent we) {
-                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-            }
-
-            @Override
-            public void windowDeactivated(WindowEvent we) {
-                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-            }
-            
-        }
-        testFrame.addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosing(WindowEvent e) {
-                try {
-                    System.out.println("Window Closing");
-                    inputPDF.close();
-                    testFrame.setVisible(false);
-                    //testFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                }
-                catch (IOException io) {
-                    io.printStackTrace();
-                }
-            }
-            @Override
-            public void windowLostFocus(WindowEvent e) {
-                System.out.println("Lost Focus");
-            }
-            
-            @Override
-            public void windowActivated(WindowEvent e) {
-                System.out.println("Activated");
-            }
-            
-            @Override
-            public void windowDeactivated(WindowEvent e) {
-                System.out.println("Deactivated");
-            }
-            
-            @Override
-            public void windowClosed(WindowEvent e) {
-                System.out.println("Window Closed");
-            }
-            
-        });
-        
- 
+        PDDocument inputPDF = ICE_PDD.load(PDF_File);
         
         
 
