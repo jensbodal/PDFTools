@@ -28,8 +28,8 @@ public final class PDFTools_Controller {
     
     
     public void updateView() {
-        view.getButton().addActionListener(testListen);
         view.getNextPageButton().addActionListener(testListen);
+        view.getPreviousPageButton().addActionListener(testListen);
         this.view.setVisible(true);
     }
     

@@ -33,8 +33,8 @@ public class PDFTools_View extends JFrame {
     private int frameWidth;
     private int frameX = 0;
     private int frameY = 0;
-    JButton nextPageButton;
-    
+    private JButton nextPageButton;
+    private JButton previousPageButton;
     
     public PDFTools_View(PDFTools_Model model) {
         // Set up Logic
@@ -51,7 +51,7 @@ public class PDFTools_View extends JFrame {
         
         // Layout Components
         
-        //this.add(pagePanel);
+        this.add(pagePanel);
         this.setJMenuBar(JMenuBar());
         
         
@@ -82,15 +82,16 @@ public class PDFTools_View extends JFrame {
         
         
         // Previous Page
-        JButton previousPage = new JButton("Previous Page");
-        menuBar.add(previousPage);
+        if (previousPageButton == null) {
+            setPreviousPageButton();
+        }
+        menuBar.add(previousPageButton);
         
         // Next Page
-        menuBar.add(nextPageButton());
-        
-        // Test Button
-        testButton = new JButton("TESTING");
-        menuBar.add(testButton);
+        if (nextPageButton == null) {
+            setNextPageButton();
+        }
+        menuBar.add(nextPageButton);
         
         return menuBar;
     }
@@ -101,19 +102,20 @@ public class PDFTools_View extends JFrame {
         return panel;
     }
     
-    public JButton nextPageButton() {
+    public void setNextPageButton() {
         nextPageButton = new JButton("Next Page");
-        return nextPageButton;
+    }
+    
+    public void setPreviousPageButton() {
+        previousPageButton = new JButton ("Previous Page");
     }
 
-    private JButton testButton;
-    
-    public JButton getButton() {
-        return testButton;
+    public JButton getPreviousPageButton() {
+        return previousPageButton;
     }
     
     public JButton getNextPageButton() {
-        return nextPageButton();
+        return nextPageButton;
     }
 
  
