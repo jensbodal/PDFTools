@@ -5,13 +5,13 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
-import java.util.List;
+
 
 /**
  *
  * @author jensb
  */
-public final class PDFTools_Controller {
+public final class PDFTools_Controller implements PDFTools_Interface {
 
     private PDFTools_Model model;
     private PDFTools_View view;
@@ -22,25 +22,17 @@ public final class PDFTools_Controller {
         
         // Add listeners to the view
         this.view.addWindowListener(windowListener);
-        
-        
+        this.view.getNextPageButton().addActionListener(L_NextPage());
+        this.view.getPreviousPageButton().addActionListener(L_PreviousPage());
     }
     
     
     public void updateView() {
-        view.getNextPageButton().addActionListener(testListen);
-        view.getPreviousPageButton().addActionListener(testListen);
+
         this.view.setVisible(true);
     }
     
-    ActionListener testListen = new ActionListener() {
-        @Override
-        public void actionPerformed(ActionEvent ae) {
-            System.out.println(ae.getActionCommand());
-        }
-    };
-    
-    WindowListener windowListener = new WindowAdapter() {
+   WindowListener windowListener = new WindowAdapter() {
         @Override
         public void windowActivated(WindowEvent we) {
             System.out.println("Activated");
@@ -60,8 +52,25 @@ public final class PDFTools_Controller {
         }
     };
 
+    @Override
+    public ActionListener L_NextPage() {
+        return new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                System.out.println(ae.getActionCommand());
+            }
+        };
+    }
 
-
+    @Override
+    public ActionListener L_PreviousPage() {
+        return new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                System.out.println(ae.getActionCommand());
+            }
+        };
+    }
 
 
 }

@@ -2,8 +2,10 @@ package pdftools;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.util.List;
 import javax.swing.JOptionPane;
+import org.apache.pdfbox.exceptions.COSVisitorException;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
 
@@ -29,6 +31,7 @@ public class PDFTools_Model {
     private void setPath() {
         String pathWork = "C:\\Users\\jensb\\Dropbox\\Java Libraries\\zProjectStuff\\PDF_Stuff\\12-13 Port Risk Binder.PDF";
         String pathHome = "I:\\Dropbox\\Java Libraries\\zProjectStuff\\PDF_Stuff\\test.PDF";
+        //String pathHome = "I:\\Dropbox\\Java Libraries\\zProjectStuff\\PDF_Stuff\\12-13 Port Risk Binder.PDF";//
         String path_OSX = "/Users/akevit/Dropbox/Java Libraries/zProjectStuff/PDF_Stuff/12-13 Port Risk Binder.PDF";
         
         if (new File(pathWork).exists()) {
@@ -44,6 +47,7 @@ public class PDFTools_Model {
             JOptionPane.showMessageDialog(null, "Cannot set PDF_Path");
             System.exit(0);
         }
+        System.out.println(PDF_Path);
     }
     
     public String getPath() {
@@ -54,6 +58,7 @@ public class PDFTools_Model {
         File PDF_File = new File(path);
         try {
             this.inputPDF = PDDocument.load(PDF_File);
+            
         }
         catch (IOException e) {
             e.printStackTrace();
