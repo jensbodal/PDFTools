@@ -30,8 +30,8 @@ public class PDFTools_Model {
     
     private void setPath() {
         String pathWork = "C:\\Users\\jensb\\Dropbox\\Java Libraries\\zProjectStuff\\PDF_Stuff\\12-13 Port Risk Binder.PDF";
-        String pathHome = "I:\\Dropbox\\Java Libraries\\zProjectStuff\\PDF_Stuff\\test.PDF";
-        //String pathHome = "I:\\Dropbox\\Java Libraries\\zProjectStuff\\PDF_Stuff\\12-13 Port Risk Binder.PDF";//
+        //String pathHome = "I:\\Dropbox\\Java Libraries\\zProjectStuff\\PDF_Stuff\\test.PDF";
+        String pathHome = "I:\\Dropbox\\Java Libraries\\zProjectStuff\\PDF_Stuff\\12-13 Port Risk Binder.PDF";//
         String path_OSX = "/Users/akevit/Dropbox/Java Libraries/zProjectStuff/PDF_Stuff/12-13 Port Risk Binder.PDF";
         
         if (new File(pathWork).exists()) {
