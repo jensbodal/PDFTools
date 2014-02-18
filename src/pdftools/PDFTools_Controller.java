@@ -28,7 +28,6 @@ public final class PDFTools_Controller implements PDFTools_Interface {
     
     
     public void updateView() {
-
         this.view.setVisible(true);
     }
     

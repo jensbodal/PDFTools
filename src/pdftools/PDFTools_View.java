@@ -15,6 +15,8 @@ import org.apache.pdfbox.pdfviewer.PDFPagePanel;
  * @author jensb
  */
 public class PDFTools_View extends JFrame {
+    private int PADDING = 25;
+    
     private PDFTools_Model model;
     private PDFPagePanel pagePanel;
     private int frameHeight;
@@ -50,9 +52,9 @@ public class PDFTools_View extends JFrame {
 
     
     private void setFrameBounds() {
-        frameWidth = this.pagePanel.getWidth();
+        frameWidth = this.pagePanel.getWidth() + PADDING;
         frameHeight = (this.pagePanel.getHeight() + 
-                (this.getPreferredSize().height * 2));
+                (this.getPreferredSize().height + PADDING));
         this.setBounds(frameX, frameY, frameWidth, frameHeight);
     }
     
