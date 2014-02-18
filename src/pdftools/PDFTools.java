@@ -47,34 +47,32 @@ public class PDFTools
         PDFTools_Model model = new PDFTools_Model();
         PDFTools_View view = new PDFTools_View(model);
         PDFTools_Controller controller = new PDFTools_Controller(model, view);
-        System.out.println(model.getPath());
-        view.setVisible(true);
-        while (view.isVisible()) {
-            
-        }
-        
-        
-        Splitter splitPDF = new Splitter();
+        controller.updateView();
+        //view.setVisible(true);
 
         
         
-        
-        
-        
-        PDFPagePanel panel = new PDFPagePanel();
-        JFrame frame = new JFrame();
-        WindowAdapter adapter = new WindowAdapter() {
-            public void asdf(PDPage page) {
-                
-            }
-            
-            @Override
-            public void windowActivated(WindowEvent we) {
-                System.out.println("Activated");
-            }
-        };
-        frame.addWindowListener(adapter);
-        frame.setVisible(true);
+//        Splitter splitPDF = new Splitter();
+//
+//        
+//        
+//        
+//        
+//        
+//        PDFPagePanel panel = new PDFPagePanel();
+//        JFrame frame = new JFrame();
+//        WindowAdapter adapter = new WindowAdapter() {
+//            public void asdf(PDPage page) {
+//                
+//            }
+//            
+//            @Override
+//            public void windowActivated(WindowEvent we) {
+//                System.out.println("Activated");
+//            }
+//        };
+//        frame.addWindowListener(adapter);
+//        frame.setVisible(true);
 
         
 //        //Begin ICEPDF
