@@ -48,7 +48,7 @@ public class PDFTools
         PDFTools_View view = new PDFTools_View(model);
         PDFTools_Controller controller = new PDFTools_Controller(model, view);
         controller.updateView();
-        //view.setVisible(true);
+        
 
         
         
