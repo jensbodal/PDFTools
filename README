@@ -1,3 +1,10 @@
 Java package meant to be a standalone PDF reader
 
 Planning to implement additional features as I go along, however this is more of a personal project to practice working on other projects and coding in Java.
+
+Currently I am experimenting with the following libraries:
+
+ICEPdf - 5.0.4
+Thumbnailinator - 0.4.7
+PDFBox - 1.8.4
+PDFView aka PDFRenderer - 0.9.1
