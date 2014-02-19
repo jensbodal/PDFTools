@@ -79,6 +79,8 @@ import com.sun.pdfview.action.GoToAction;
 import com.sun.pdfview.action.PDFAction;
 import java.lang.reflect.InvocationTargetException;
 
+
+
 /**
  * A demo PDF Viewer application.
  */
@@ -126,6 +128,31 @@ public class PDFViewer extends JFrame
     /** the document menu */
     JMenu docMenu;
 
+    public static void main(String args[]) {
+        String fileName = null;
+        boolean useThumbs = true;
+
+        for (int i = 0; i < args.length; i++) {
+            if (args[i].equalsIgnoreCase("-noThumb")) {
+                useThumbs = false;
+            } else if (args[i].equalsIgnoreCase("-help") ||
+                    args[i].equalsIgnoreCase("-h") ||
+                    args[i].equalsIgnoreCase("-?")) {
+                System.out.println("java com.sun.awc.PDFViewer [flags] [file]");
+                System.out.println("flags: [-noThumb] [-help or -h or -?]");
+                System.exit(0);
+            } else {
+                fileName = args[i];
+            }
+        }
+        // start the viewer
+        PDFViewer viewer;
+        viewer = new PDFViewer(useThumbs);
+        if (fileName != null) {
+            viewer.doOpen(fileName);
+        }
+    }
+    
     /**
      * utility method to get an icon from the resources of this class
      * @param name the name of the icon
@@ -735,7 +762,8 @@ public class PDFViewer extends JFrame
     FileFilter pdfFilter = new FileFilter() {
 
         public boolean accept(File f) {
-            return f.isDirectory() || f.getName().endsWith(".pdf");
+            return f.isDirectory() || 
+                    f.getName().toLowerCase().endsWith(".pdf");
         }
 
         public String getDescription() {
@@ -1016,31 +1044,6 @@ public class PDFViewer extends JFrame
             fullScreen = null;
             gotoPage(curpage);
             fullScreenButton.setSelected(false);
-        }
-    }
-
-    public static void main(String args[]) {
-        String fileName = null;
-        boolean useThumbs = true;
-
-        for (int i = 0; i < args.length; i++) {
-            if (args[i].equalsIgnoreCase("-noThumb")) {
-                useThumbs = false;
-            } else if (args[i].equalsIgnoreCase("-help") ||
-                    args[i].equalsIgnoreCase("-h") ||
-                    args[i].equalsIgnoreCase("-?")) {
-                System.out.println("java com.sun.awc.PDFViewer [flags] [file]");
-                System.out.println("flags: [-noThumb] [-help or -h or -?]");
-                System.exit(0);
-            } else {
-                fileName = args[i];
-            }
-        }
-        // start the viewer
-        PDFViewer viewer;
-        viewer = new PDFViewer(useThumbs);
-        if (fileName != null) {
-            viewer.doOpen(fileName);
         }
     }
 
