@@ -25,7 +25,6 @@ import com.sun.pdfview.PDFPage;
 import com.sun.pdfview.PDFRenderer;
 import java.awt.*;
 import java.awt.event.*;
-import java.awt.geom.*;
 import java.awt.print.*;
 import javax.swing.*;
 import java.nio.channels.FileChannel;
@@ -42,7 +41,7 @@ import java.io.File;
 public class PDFPrintPage implements Printable {
 
     /** The PDFFile to be printed */
-    private PDFFile file;
+    private PDFFile pFile;
     /** The PrinterJob for this print job */
     private PrinterJob pjob;
     /** A dialog box indicating printing status, with cancel button */
@@ -54,16 +53,16 @@ public class PDFPrintPage implements Printable {
 
     /**
      * Create a new PDFPrintPage object for a particular PDFFile.
-     * @param file the PDFFile to be printed.
+     * @param pFile the PDFFile to be printed.
      */
-    public PDFPrintPage(PDFFile file) {
-        this.file = file;
+    public PDFPrintPage(PDFFile pFile) {
+        this.pFile = pFile;
     }
 
     /**
-     * An example method to print a file.
+     * An example method to print a pFile.
      *
-     * @param   filename            The path of the PDF file to print.
+     * @param   filename            The path of the PDF pFile to print.
      * @param   setupPaper          true to post a page setup dialog
      * @throws java.io.IOException
      */
@@ -124,7 +123,7 @@ public class PDFPrintPage implements Printable {
         pagenumlabel = new JLabel("1");
         line.add(pagenumlabel);
         line.add(new JLabel(" of "));
-        JLabel totalpages = new JLabel(String.valueOf(file.getNumPages()));
+        JLabel totalpages = new JLabel(String.valueOf(pFile.getNumPages()));
         line.add(totalpages);
         lines.add(line);
 
@@ -179,7 +178,7 @@ public class PDFPrintPage implements Printable {
         int pagenum = index + 1;
 
         // don't bother if the page number is out of range.
-        if ((pagenum >= 1) && (pagenum <= file.getNumPages())) {
+        if ((pagenum >= 1) && (pagenum <= pFile.getNumPages())) {
 
             // update the page number in the progress dialog
             if (pagenumlabel != null) {
@@ -188,7 +187,7 @@ public class PDFPrintPage implements Printable {
 
             // fit the PDFPage into the printing area
             Graphics2D g2 = (Graphics2D) g;
-            PDFPage page = file.getPage(pagenum);
+            PDFPage page = pFile.getPage(pagenum);
             double pwidth = format.getImageableWidth();
             double pheight = format.getImageableHeight();
 

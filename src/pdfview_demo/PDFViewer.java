@@ -761,11 +761,13 @@ public class PDFViewer extends JFrame
      */
     FileFilter pdfFilter = new FileFilter() {
 
+        @Override
         public boolean accept(File f) {
             return f.isDirectory() || 
                     f.getName().toLowerCase().endsWith(".pdf");
         }
 
+        @Override
         public String getDescription() {
             return "Choose a PDF file";
         }
@@ -841,6 +843,7 @@ public class PDFViewer extends JFrame
             setName(getClass().getName());
         }
 
+        @Override
         public void run() {
             try {
                 ptPages.show(ptPjob);
@@ -1014,6 +1017,7 @@ public class PDFViewer extends JFrame
             force = forcechoice;
         }
 
+        @Override
         public void run() {
             fspp = new PagePanel();
             fspp.setBackground(Color.black);
@@ -1050,27 +1054,28 @@ public class PDFViewer extends JFrame
     /**
      * Handle a key press for navigation
      */
+    @Override
     public void keyPressed(KeyEvent evt) {
         int code = evt.getKeyCode();
-        if (code == evt.VK_LEFT) {
+        if (code == KeyEvent.VK_LEFT) {
             doPrev();
-        } else if (code == evt.VK_RIGHT) {
+        } else if (code == KeyEvent.VK_RIGHT) {
             doNext();
-        } else if (code == evt.VK_UP) {
+        } else if (code == KeyEvent.VK_UP) {
             doPrev();
-        } else if (code == evt.VK_DOWN) {
+        } else if (code == KeyEvent.VK_DOWN) {
             doNext();
-        } else if (code == evt.VK_HOME) {
+        } else if (code == KeyEvent.VK_HOME) {
             doFirst();
-        } else if (code == evt.VK_END) {
+        } else if (code == KeyEvent.VK_END) {
             doLast();
-        } else if (code == evt.VK_PAGE_UP) {
+        } else if (code == KeyEvent.VK_PAGE_UP) {
             doPrev();
-        } else if (code == evt.VK_PAGE_DOWN) {
+        } else if (code == KeyEvent.VK_PAGE_DOWN) {
             doNext();
-        } else if (code == evt.VK_SPACE) {
+        } else if (code == KeyEvent.VK_SPACE) {
             doNext();
-        } else if (code == evt.VK_ESCAPE) {
+        } else if (code == KeyEvent.VK_ESCAPE) {
             setFullScreenMode(false, false);
         }
     }
@@ -1100,6 +1105,7 @@ public class PDFViewer extends JFrame
          * waits for the timeout, and if time expires, go to the specified
          * page number
          */
+        @Override
         public void run() {
             long now, then;
             synchronized (this) {
@@ -1125,12 +1131,14 @@ public class PDFViewer extends JFrame
     }
     PageBuilder pb = new PageBuilder();
 
+    @Override
     public void keyReleased(KeyEvent evt) {
     }
 
     /**
      * gets key presses and tries to build a page if they're numeric
      */
+    @Override
     public void keyTyped(KeyEvent evt) {
         char key = evt.getKeyChar();
         if (key >= '0' && key <= '9') {
@@ -1143,6 +1151,7 @@ public class PDFViewer extends JFrame
      * Someone changed the selection of the outline tree.  Go to the new
      * page.
      */
+    @Override
     public void valueChanged(TreeSelectionEvent e) {
         if (e.isAddedPath()) {
             OutlineNode node = (OutlineNode) e.getPath().getLastPathComponent();

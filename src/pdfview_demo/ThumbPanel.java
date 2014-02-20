@@ -98,6 +98,7 @@ public class ThumbPanel extends JPanel
             setPreferredSize(new Dimension(defaultWidth, 200));
             addMouseListener(new MouseAdapter() {
 
+                @Override
                 public void mouseClicked(MouseEvent evt) {
                     handleClick(evt.getX(), evt.getY());
                 }
@@ -116,6 +117,7 @@ public class ThumbPanel extends JPanel
      * Preferentially works on the needdrawn thumbnail, otherwise, go in
      * order.
      */
+    @Override
     public void run() {
         int workingon = 0;	// the thumbnail we'll be rendering next.
 
@@ -283,6 +285,7 @@ public class ThumbPanel extends JPanel
             page = pagenum;
         }
 
+        @Override
         public void run() {
             if (listener != null) {
                 listener.gotoPage(page);
@@ -294,6 +297,7 @@ public class ThumbPanel extends JPanel
      * Updates the positions of the thumbnails, and draws them to the
      * screen.
      */
+    @Override
     public void paint(Graphics g) {
         int x = 0;
         int y = 0;
@@ -359,6 +363,7 @@ public class ThumbPanel extends JPanel
     /**
      * Handles notification of any image updates.  Not used any more.
      */
+    @Override
     public boolean imageUpdate(Image img, int infoflags, int x, int y,
             int width, int height) {
         //	if ((infoflags & ALLBITS)!=0) {
@@ -367,23 +372,28 @@ public class ThumbPanel extends JPanel
         return ((infoflags & (ALLBITS | ERROR | ABORT)) == 0);
     }
 
+    @Override
     public Dimension getPreferredScrollableViewportSize() {
         return getPreferredSize();
     }
 
+    @Override
     public int getScrollableBlockIncrement(Rectangle visrect, int orientation,
             int direction) {
         return Math.max(lineheight, (visrect.height / lineheight) * lineheight);
     }
 
+    @Override
     public boolean getScrollableTracksViewportHeight() {
         return false;
     }
 
+    @Override
     public boolean getScrollableTracksViewportWidth() {
         return true;
     }
 
+    @Override
     public int getScrollableUnitIncrement(Rectangle visrect, int orientation,
             int direction) {
         return lineheight;

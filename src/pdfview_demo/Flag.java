@@ -52,7 +52,10 @@ public class Flag {
 	if (!isSet) {
 	    try {
 		wait();
-	    } catch (InterruptedException ie) {}
+	    } 
+            catch (InterruptedException ie) {
+                ie.printStackTrace();
+            }
 	}
     }
 

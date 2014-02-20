@@ -159,6 +159,7 @@ public class PagePanel extends JPanel
     /**
      * Draw the image.
      */
+    @Override
     public void paint(Graphics g) {
         Dimension sz = getSize();
         g.setColor(getBackground());
@@ -241,6 +242,7 @@ public class PagePanel extends JPanel
      * changed.  Repaints that portion.
      * @return true if more updates are desired.
      */
+    @Override
     public boolean imageUpdate(Image img, int infoflags, int x, int y,
             int width, int height) {
         // System.out.println("Image update: " + (infoflags & ALLBITS));
@@ -287,6 +289,7 @@ public class PagePanel extends JPanel
     int downy;
 
     /** Handles a mousePressed event */
+    @Override
     public void mousePressed(MouseEvent evt) {
         downx = evt.getX();
         downy = evt.getY();
@@ -296,6 +299,7 @@ public class PagePanel extends JPanel
      * Handles a mouseReleased event.  If zooming is turned on and there's
      * a valid zoom rectangle, set the image clip to the zoom rect.
      */
+    @Override
     public void mouseReleased(MouseEvent evt) {
         // calculate new clip
         if (!useZoom || zoomRect == null ||
@@ -310,15 +314,23 @@ public class PagePanel extends JPanel
         zoomRect = null;
     }
 
+    @Override
     public void mouseClicked(MouseEvent evt) {
     }
 
+    /**
+     *
+     * @param evt
+     */
+    @Override
     public void mouseEntered(MouseEvent evt) {
     }
 
+    @Override
     public void mouseExited(MouseEvent evt) {
     }
 
+    @Override
     public void mouseMoved(MouseEvent evt) {
     }
 
@@ -326,6 +338,7 @@ public class PagePanel extends JPanel
      * Handles a mouseDragged event. Constrains the zoom rect to the
      * aspect ratio of the panel unless the shift key is down.
      */
+    @Override
     public void mouseDragged(MouseEvent evt) {
         if (useZoom) {
             int x = evt.getX();
