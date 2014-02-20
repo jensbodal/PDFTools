@@ -2,10 +2,8 @@ package pdftools;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.OutputStream;
 import java.util.List;
 import javax.swing.JOptionPane;
-import org.apache.pdfbox.exceptions.COSVisitorException;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
 
