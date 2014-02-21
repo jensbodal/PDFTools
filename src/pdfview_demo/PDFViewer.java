@@ -111,6 +111,8 @@ public class PDFViewer extends JFrame
     JToggleButton fullScreenButton;
     /** the current page number text field */
     JTextField pageField;
+    /** Feature to be added **/
+    JButton splitDocument;
     /** the full screen window, or null if not in full screen mode */
     FullScreenWindow fullScreen;
     /** the root of the outline, or null if there is no outline */
@@ -313,6 +315,7 @@ public class PDFViewer extends JFrame
         super(TITLE);
         addWindowListener(new WindowAdapter() {
 
+            @Override
             public void windowClosing(WindowEvent evt) {
                 doQuit();
             }
@@ -324,19 +327,19 @@ public class PDFViewer extends JFrame
     /**
      * Initialize this PDFViewer by creating the GUI.
      */
-    protected void init() {
+    private void init() {
         page = new PagePanel();
         page.addKeyListener(this);
 
         if (doThumb) {
-            split = new JSplitPane(split.HORIZONTAL_SPLIT);
-            split.addPropertyChangeListener(split.DIVIDER_LOCATION_PROPERTY,
+            split = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT);
+            split.addPropertyChangeListener(JSplitPane.DIVIDER_LOCATION_PROPERTY,
                     thumbAction);
             split.setOneTouchExpandable(true);
             thumbs = new ThumbPanel(null);
             thumbscroll = new JScrollPane(thumbs,
-                    thumbscroll.VERTICAL_SCROLLBAR_ALWAYS,
-                    thumbscroll.HORIZONTAL_SCROLLBAR_NEVER);
+                    JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
+                    JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
             split.setLeftComponent(thumbscroll);
             split.setRightComponent(page);
             getContentPane().add(split, BorderLayout.CENTER);
@@ -360,6 +363,7 @@ public class PDFViewer extends JFrame
         pageField.setMaximumSize(new Dimension(45, 32));
         pageField.addActionListener(new ActionListener() {
 
+            @Override
             public void actionPerformed(ActionEvent evt) {
                 doPageTyped();
             }
@@ -372,6 +376,10 @@ public class PDFViewer extends JFrame
         jb.setText("");
         toolbar.add(jb);
 
+        toolbar.add(Box.createHorizontalGlue());
+        splitDocument = new JButton("Split");
+        toolbar.add(splitDocument);
+        
         toolbar.add(Box.createHorizontalGlue());
 
         fullScreenButton = new JToggleButton(fullScreenAction);
